@@ -1,0 +1,25 @@
+# Virtual environments
+.venv/
+env/
+ENV/
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+*.log
+logs/
+
+# Tools
+.uv/
+uv.lock
+.coverage
+
+# OS files
+.DS_Store
+
+# Test cache
+.pytest_cache/

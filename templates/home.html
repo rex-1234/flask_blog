@@ -1,0 +1,38 @@
+{% extends "layout.html" %} {% block content %}
+<section class="hero text-center">
+  <p class="hero-eyebrow">Flask Blog</p>
+  <h1 class="hero-title">Thoughts that shape tomorrow.</h1>
+  <p class="hero-subtitle">
+    A minimal, distraction‑free space for ideas, stories, and perspectives from
+    leading voices.
+  </p>
+  <div class="hero-cta">
+    <a href="#stories" class="hero-link primary">Read the latest</a>
+    <a href="/about" class="hero-link secondary">Learn more</a>
+  </div>
+</section>
+
+<section id="stories" class="stories-section">
+  <div class="section-header">
+    <h2 class="section-title">Latest stories</h2>
+    <p class="section-subtitle">Curated content, updated regularly.</p>
+  </div>
+
+  <div class="row g-4">
+    {% for post in posts %}
+    <div class="col-md-6">
+      <article class="story-tile">
+        <div class="story-meta">
+          <span class="story-author">{{ post.author }}</span>
+          <span class="story-dot">•</span>
+          <span class="story-date">{{ post.date_posted }}</span>
+        </div>
+        <h3 class="story-title">{{ post.title }}</h3>
+        <p class="story-excerpt">{{ post.content }}</p>
+        <a href="#" class="story-link">Read the story</a>
+      </article>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock content %}
