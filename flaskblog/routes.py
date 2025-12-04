@@ -1,8 +1,7 @@
-from flask import Flask, render_template, url_for, flash, redirect
-from forms import RegisterationForm, LoginForm
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'e1a40d7a2efd062b4c7caee4499a56aa'
+from flask import render_template, url_for, flash, redirect
+from flaskblog import app
+from flaskblog.forms import RegisterationForm, LoginForm
+from flaskblog.models import User, Post
 
 posts = [
     {
@@ -18,6 +17,7 @@ posts = [
         'date_posted': 'Dec 1, 2025'
     }
 ]
+
 
 @app.route("/")
 @app.route("/home")
