@@ -2,7 +2,87 @@
 <section class="account-hero text-center">
   <p class="hero-eyebrow">Account</p>
   <h1 class="hero-title">Manage your account</h1>
-  <p class="hero-subtitle">Update your account information and preferences.</p>
-  <h2>{{ current_user.username }}</h2>
+  <div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{ image_file }}" />
+      <div class="media-body">
+        <h2 class="account-heading">{{ current_user.username }}</h2>
+        <p class="text-secondary">{{ current_user.email }}</p>
+      </div>
+    </div>
+    <p class="hero-subtitle">
+      Update your account information and preferences.
+    </p>
+    <form
+      method="POST"
+      action=""
+      class="apple-form"
+      ,
+      enctype="multipart/form-data"
+    >
+      {{ form.hidden_tag() }}
+
+      <div class="form-field">
+        {{ form.username.label(class="form-label") }} {% if form.username.errors
+        %} {{ form.username(class="form-input is-invalid") }}
+        <div class="form-error">
+          {% for error in form.username.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %} {{ form.username(class="form-input") }} {% endif %}
+      </div>
+
+      <div class="form-field">
+        {{ form.email.label(class="form-label") }} {% if form.email.errors %} {{
+        form.email(class="form-input is-invalid") }}
+        <div class="form-error">
+          {% for error in form.email.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %} {{ form.email(class="form-input") }} {% endif %}
+      </div>
+
+      <div class="form-field">
+        {{ form.picture.label(class="form-label") }}
+
+        <div class="custom-file-upload">
+          <label for="picture-upload" class="upload-btn">
+            Choose Profile Picture
+          </label>
+
+          {{ form.picture(id="picture-upload", class="hidden-input") }}
+        </div>
+
+        <!-- Selected file name -->
+        <p id="file-name-display" class="file-name-text"></p>
+
+        {% if form.picture.errors %}
+        <div class="form-error">
+          {% for error in form.picture.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="form-actions">{{ form.submit(class="form-submit") }}</div>
+    </form>
+  </div>
 </section>
+
+<script>
+  const fileInput = document.getElementById("picture-upload");
+  const fileNameDisplay = document.getElementById("file-name-display");
+
+  fileInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      fileNameDisplay.textContent = `Selected file: ${file.name}`;
+    } else {
+      fileNameDisplay.textContent = "";
+    }
+  });
+</script>
 {% endblock %}
