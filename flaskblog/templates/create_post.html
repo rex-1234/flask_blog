@@ -1,0 +1,52 @@
+{% extends "layout.html" %} {% block content %}
+<section class="form-hero">
+  <div class="form-container">
+    {% if post %}
+    <p class="form-eyebrow">Edit</p>
+    <h1 class="form-title">Edit Post</h1>
+    <p class="form-subtitle">Make changes and save when you're ready.</p>
+    {% else %}
+    <p class="form-eyebrow">Create</p>
+    <h1 class="form-title">New Post</h1>
+    <p class="form-subtitle">Share something thoughtful.</p>
+    {% endif %}
+
+    <form
+      method="POST"
+      action="{% if post %}{{ url_for('update_post', post_id=post.id) }}{% else %}{{ url_for('new_post') }}{% endif %}"
+      class="apple-form"
+    >
+      {{ form.hidden_tag() }}
+
+      <div class="form-field">
+        {{ form.title.label(class="form-label") }} {% if form.title.errors %} {{
+        form.title(class="form-input is-invalid") }}
+        <div class="form-error">
+          {% for error in form.title.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %} {{ form.title(class="form-input") }} {% endif %}
+      </div>
+
+      <div class="form-field">
+        {{ form.content.label(class="form-label") }} {% if form.content.errors
+        %} {{ form.content(class="form-input is-invalid") }}
+        <div class="form-error">
+          {% for error in form.content.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %} {{ form.content(class="form-input") }} {% endif %}
+      </div>
+
+      <div class="form-actions">
+        {% if post %} {{ form.submit(class="form-submit btn btn-primary btn-lg
+        btn-block", value='Update Post') }} {% else %} {{
+        form.submit(class="form-submit btn btn-primary btn-lg btn-block",
+        value='Create Post') }} {% endif %}
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock content %}

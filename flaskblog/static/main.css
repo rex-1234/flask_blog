@@ -254,6 +254,18 @@ h6 {
   font-size: 13px;
   color: var(--text-tertiary);
   margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.story-author-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--border-color);
+  flex-shrink: 0;
 }
 
 .story-author {
@@ -554,122 +566,108 @@ h6 {
   font-size: 16px;
 }
 
-/* File Upload Styling */
-.file-upload-wrapper {
-  position: relative;
-  margin-top: 0.5rem;
-}
-
-.file-upload-input {
-  position: absolute;
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  z-index: -1;
-}
-
-.file-upload-label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
-  background: var(--bg-primary);
-  border: 2px dashed var(--border-color);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  min-height: 80px;
-  flex-direction: column;
-}
-
-.file-upload-label:hover {
-  border-color: var(--accent-color);
-  background: var(--accent-soft);
-  transform: translateY(-2px);
+/* Post card / article styles */
+.post-card {
+  border-radius: 16px;
+  border: 1px solid rgba(210, 210, 215, 0.7);
+  padding: 1.6rem;
+  background: var(--bg-elevated);
   box-shadow: var(--shadow-subtle);
+  max-width: 900px;
+  margin: 1.25rem auto;
 }
 
-.file-upload-label:active {
-  transform: translateY(0);
+.post-meta-row {
+  gap: 0.75rem;
 }
 
-.file-upload-icon {
-  color: var(--accent-color);
-  flex-shrink: 0;
-}
-
-.file-upload-text {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.file-upload-hint {
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-.file-upload-input:focus + .file-upload-label {
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
-}
-
-.file-upload-input:valid + .file-upload-label {
-  border-color: #27ae60;
-  border-style: solid;
-  background: #d1f2eb;
-}
-
-.file-upload-input:valid + .file-upload-label .file-upload-text::after {
-  content: " selected";
-  color: #27ae60;
-  font-weight: 600;
-}
-
-.file-upload-preview {
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.file-upload-preview img {
-  max-width: 150px;
-  max-height: 150px;
-  border-radius: 12px;
-  border: 2px solid var(--border-color);
+/* Reuse small avatar style from story tiles */
+.story-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   object-fit: cover;
+  border: 1px solid rgba(210, 210, 215, 0.8);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
 }
 
-.custom-file-upload {
-  display: flex;
-  justify-content: center;
-  margin-top: 5px;
+.post-author-link {
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+.post-author-link:hover {
+  text-decoration: underline;
 }
 
-.upload-btn {
-  background-color: #f1f1f1;
-  padding: 12px 22px;
-  border-radius: 10px;
-  cursor: pointer;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  transition: background 0.2s;
+/* Improve post spacing and alignment */
+.improved-post-card {
+  padding: 2.5rem;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-.upload-btn:hover {
-  background-color: #e5e5e5;
+.post-header {
+  gap: 1rem;
 }
 
-.hidden-input {
-  display: none;
+.post-author {
+  font-weight: 600;
+  font-size: 1.05rem;
 }
 
-.file-name-text {
-  margin-top: 8px;
+.post-date {
+  color: #6d6d6d;
   font-size: 0.9rem;
-  color: #555;
-  text-align: center;
+}
+
+.post-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.post-content {
+  font-size: 1.15rem;
+  color: #4a4a4a;
+  line-height: 1.65;
+}
+
+/* Article title & body */
+.article-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary-muted);
+  margin-bottom: 0.6rem;
+}
+
+.article-body .article-content {
+  font-size: 16px;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+}
+
+/* Action buttons (edit/delete) — match theme */
+.post-actions .btn {
+  min-width: 72px;
+}
+
+/* Make the modal buttons consistent */
+.modal .btn-danger {
+  background: #ff3b30;
+  border-color: #ff3b30;
+}
+
+/* Responsive tweaks */
+@media (max-width: 767.98px) {
+  .post-meta-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .post-actions {
+    margin-top: 0.6rem;
+  }
 }
 
 /* Responsive */
