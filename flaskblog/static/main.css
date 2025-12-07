@@ -566,6 +566,74 @@ h6 {
   font-size: 16px;
 }
 
+/* ========== Custom File Upload (Used in account.html) ========== */
+.custom-file-upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
+}
+
+.custom-file-input {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 46px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.custom-file-label {
+  background: #f1f1f5;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  width: 100%;
+  text-align: left;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.custom-file-label:hover {
+  background: #ebebf0;
+}
+
+.selected-file {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.custom-file-upload-wrapper.has-error .custom-file-label {
+  border: 1px solid #ff3b30 !important;
+  background: #ffecec !important;
+  color: #c0392b;
+}
+
+.file-error span {
+  font-size: 13px;
+  margin-top: 4px;
+  color: #ff3b30 !important;
+}
+
+/* Highlight error state */
+.custom-file-upload-wrapper.has-error .custom-file-label {
+  border: 1px solid #ff4d4d !important;
+  background: #ffecec !important;
+  color: #d10000;
+}
+
+.file-error span {
+  color: #d10000 !important;
+  font-weight: 500;
+  margin-top: 6px;
+  display: block;
+}
+
 /* Post card / article styles */
 .post-card {
   border-radius: 16px;

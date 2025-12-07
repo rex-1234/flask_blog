@@ -47,19 +47,24 @@
       <div class="form-field">
         {{ form.picture.label(class="form-label") }}
 
-        <div class="custom-file-upload">
-          <label for="picture-upload" class="upload-btn">
-            Choose Profile Picture
-          </label>
+        <div
+          class="custom-file-upload-wrapper {% if form.picture.errors %} has-error {% endif %}"
+        >
+          <!-- Hidden real file input -->
+          {{ form.picture(id="picture-upload", class="custom-file-input") }}
 
-          {{ form.picture(id="picture-upload", class="hidden-input") }}
+          <!-- Styled label/button -->
+          <label for="picture-upload" class="custom-file-label hidden-input">
+            <span id="file-label-text">Choose Profile Picture</span>
+          </label>
         </div>
 
-        <!-- Selected file name -->
-        <p id="file-name-display" class="file-name-text"></p>
+        <!-- Selected filename (JS updated) -->
+        <div id="selected-file" class="selected-file"></div>
 
+        <!-- Error messages -->
         {% if form.picture.errors %}
-        <div class="form-error">
+        <div class="form-error file-error">
           {% for error in form.picture.errors %}
           <span>{{ error }}</span>
           {% endfor %}
@@ -74,15 +79,19 @@
 
 <script>
   const fileInput = document.getElementById("picture-upload");
-  const fileNameDisplay = document.getElementById("file-name-display");
+  const fileLabelText = document.getElementById("file-label-text");
+  const selectedFile = document.getElementById("selected-file");
 
-  fileInput.addEventListener("change", (event) => {
-    const file = event.target.files[0];
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+
     if (file) {
-      fileNameDisplay.textContent = `Selected file: ${file.name}`;
+      fileLabelText.textContent = file.name;
+      selectedFile.textContent = "";
     } else {
-      fileNameDisplay.textContent = "";
+      fileLabelText.textContent = "Choose Profile Picture";
     }
   });
 </script>
+
 {% endblock %}
