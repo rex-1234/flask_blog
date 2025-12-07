@@ -1,0 +1,78 @@
+{% extends "layout.html" %} {% block content %}
+
+<section class="hero text-center">
+  <p class="hero-eyebrow">Posts by</p>
+  <h1 class="hero-title">{{ user.username }}</h1>
+  <p class="hero-subtitle">Total posts: {{ posts.total }}</p>
+</section>
+
+<section class="stories-section">
+  <div class="row g-4">
+    {% for post in posts.items %}
+    <div class="col-md-6">
+      <article class="story-tile">
+        <div class="story-meta">
+          <img
+            class="story-avatar"
+            src="{{ url_for('static', filename='profile_pics/' ~ post.author.image_file) }}"
+            alt="{{ post.author.username }} avatar"
+          />
+          <a
+            class="story-author"
+            href="{{ url_for('user_posts', username=post.author.username) }}"
+          >
+            {{ post.author.username }}
+          </a>
+
+          <span class="story-dot">•</span>
+          <span class="story-date">
+            {{ post.date_posted.strftime('%b %-d, %Y') }}
+          </span>
+        </div>
+
+        <h3 class="story-title">{{ post.title }}</h3>
+        <p class="story-excerpt">{{ post.content }}</p>
+
+        <a href="{{ url_for('post', post_id=post.id) }}" class="story-link">
+          Read the story
+        </a>
+      </article>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Pagination -->
+  {% if posts.pages > 1 %}
+  <div class="pagination-wrapper text-center mt-5">
+    <nav>
+      <ul class="pagination justify-content-center">
+        {% for page_num in posts.iter_pages(left_edge=1, right_edge=1,
+        left_current=1, right_current=2) %} {% if page_num %} {% if posts.page
+        == page_num %}
+        <li class="page-item active">
+          <a
+            class="page-link"
+            href="{{ url_for('user_posts', username=user.username, page=page_num) }}"
+          >
+            {{ page_num }}
+          </a>
+        </li>
+        {% else %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="{{ url_for('user_posts', username=user.username, page=page_num) }}"
+          >
+            {{ page_num }}
+          </a>
+        </li>
+        {% endif %} {% else %}
+        <li class="page-item disabled"><span class="page-link">…</span></li>
+        {% endif %} {% endfor %}
+      </ul>
+    </nav>
+  </div>
+  {% endif %}
+</section>
+
+{% endblock %}

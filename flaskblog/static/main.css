@@ -727,6 +727,29 @@ h6 {
   border-color: #ff3b30;
 }
 
+.pagination .page-link {
+  border-radius: 10px;
+  margin: 0 4px;
+  padding: 0.55rem 0.9rem;
+  color: var(--text-secondary);
+  border: 1px solid rgba(210, 210, 215, 0.6);
+  background: var(--bg-elevated);
+  transition: all 0.2s ease;
+}
+
+.pagination .page-link:hover {
+  color: var(--primary-color);
+  border-color: rgba(0, 0, 0, 0.2);
+  background: #f7f7f8;
+}
+
+.pagination .active .page-link {
+  color: #fff !important;
+  background: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  font-weight: 600;
+}
+
 /* Responsive tweaks */
 @media (max-width: 767.98px) {
   .post-meta-row {
