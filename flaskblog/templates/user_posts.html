@@ -19,7 +19,7 @@
           />
           <a
             class="story-author"
-            href="{{ url_for('user_posts', username=post.author.username) }}"
+            href="{{ url_for('users.user_posts', username=post.author.username) }}"
           >
             {{ post.author.username }}
           </a>
@@ -33,7 +33,10 @@
         <h3 class="story-title">{{ post.title }}</h3>
         <p class="story-excerpt">{{ post.content }}</p>
 
-        <a href="{{ url_for('post', post_id=post.id) }}" class="story-link">
+        <a
+          href="{{ url_for('posts.post', post_id=post.id) }}"
+          class="story-link"
+        >
           Read the story
         </a>
       </article>
@@ -52,7 +55,7 @@
         <li class="page-item active">
           <a
             class="page-link"
-            href="{{ url_for('user_posts', username=user.username, page=page_num) }}"
+            href="{{ url_for('users.user_posts', username=user.username, page=page_num) }}"
           >
             {{ page_num }}
           </a>
@@ -61,7 +64,7 @@
         <li class="page-item">
           <a
             class="page-link"
-            href="{{ url_for('user_posts', username=user.username, page=page_num) }}"
+            href="{{ url_for('users.user_posts', username=user.username, page=page_num) }}"
           >
             {{ page_num }}
           </a>
