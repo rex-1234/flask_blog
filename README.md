@@ -93,19 +93,19 @@ PY
 
 ### 6. Run the application
 
-# Using Python directly
+#### Using Python directly
 
 ```bash
 python run.py
 ```
 
-# or using uv (if available)
+#### or using uv (if available)
 
 ```bash
 uv run run.py
 ```
 
-# or using Flask CLI
+#### or using Flask CLI
 
 ```bash
 export FLASK_APP=run.py
