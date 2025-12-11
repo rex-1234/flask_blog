@@ -59,22 +59,29 @@ cd FLASK_BLOG
 
 ### 2. Create a virtual environment
 
+```bash
 uv venv
 source .venv/bin/activate
+```
 
 ### 3. Install dependencies
 
+```bash
 uv sync
+```
 
 ### 4. Configure environment variables
 
+```bash
 export EMAIL_USER="your_email@example.com"
 export EMAIL_PASS="your_app_password"
 export SECRET_KEY="your_secret_key"
 export SQLALCHEMY_DATABASE_URI="sqlite:///site.db"
+```
 
 ### 5. Initialize the database
 
+```bash
 python - <<'PY'
 from flaskblog import create_app, db
 app = create_app()
@@ -82,18 +89,25 @@ with app.app_context():
 db.create_all()
 print('✓ Database created successfully')
 PY
+```
 
 ### 6. Run the application
 
 # Using Python directly
 
+```bash
 python run.py
+```
 
 # or using uv (if available)
 
+```bash
 uv run run.py
+```
 
 # or using Flask CLI
 
+```bash
 export FLASK_APP=run.py
 flask run
+```
