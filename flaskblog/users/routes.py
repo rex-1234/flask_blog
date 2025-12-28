@@ -11,7 +11,7 @@ This module defines Flask routes for user-related operations:
 All routes are registered under the 'users' blueprint.
 """
 
-from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask import render_template, url_for, flash, redirect, request, abort, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from flaskblog import db, bcrypt
 from flaskblog.models import User, Post
@@ -72,7 +72,9 @@ def login():
         return redirect(url_for('main.home'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = db.session.execute(
+                    db.select(User).filter_by(email=form.email.data)
+                ).scalar_one_or_none()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
@@ -147,7 +149,9 @@ def user_posts(username):
     Raises:
         404: If user doesn't exist
     """
-    user = User.query.filter_by(username=username).first_or_404()
+    user = db.session.execute(
+                db.select(User).filter_by(username=username)
+            ).scalar_one_or_none() or abort(404)
     page = request.args.get('page', 1, type=int)
     posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page, per_page=10)
     return render_template('user_posts.html', posts=posts, user=user)
@@ -172,7 +176,9 @@ def reset_request():
         return redirect(url_for('main.home'))
     form = RequestResetForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = db.session.execute(
+                    db.select(User).filter_by(email=form.email.data)
+                ).scalar_one_or_none()
         send_reset_email(user)
         flash('An email has been sent with instructions to reset the password.', 'info')
         return redirect(url_for('users.login'))

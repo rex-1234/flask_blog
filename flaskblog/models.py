@@ -49,7 +49,7 @@ class User(db.Model, UserMixin):
         containing the user ID. Token is valid for 30 minutes (1800 seconds) by default.
 
         Args:
-            expires_sec (int): Token expiration time in seconds (default: 1800)
+            None
 
         Returns:
             str: Encrypted token containing user ID

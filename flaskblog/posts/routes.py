@@ -59,7 +59,7 @@ def post(post_id):
     Raises:
         404: If post doesn't exist
     """
-    post = Post.query.get_or_404(post_id)
+    post = db.session.get(Post, post_id) or abort(404)
     return render_template('post.html', title=post.title, post=post)
 
 
@@ -86,7 +86,7 @@ def update_post(post_id):
         403: If current user is not the post author
         404: If post doesn't exist
     """
-    post = Post.query.get_or_404(post_id)
+    post = db.session.get(Post, post_id) or abort(404)
     if post.author != current_user:
         abort(403)
     form = PostForm()
@@ -123,7 +123,7 @@ def delete_post(post_id):
         403: If current user is not the post author
         404: If post doesn't exist
     """
-    post = Post.query.get_or_404(post_id)
+    post = db.session.get(Post, post_id) or abort(404)
     if post.author != current_user:
         abort(403)
     db.session.delete(post)
