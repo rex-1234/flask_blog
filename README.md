@@ -53,7 +53,7 @@ A modern, minimal blog application built with Flask. Features include user authe
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/rex-1234/flask_blog.git
 cd FLASK_BLOG
 ```
 
@@ -87,7 +87,7 @@ from flaskblog import create_app, db
 app = create_app()
 with app.app_context():
   db.create_all()
-print('✓ Database created successfully')
+print('Database created successfully')
 PY
 ```
 
