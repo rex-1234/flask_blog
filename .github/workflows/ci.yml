@@ -32,14 +32,15 @@ jobs:
         run: |
           pip install uv
 
-      # 4. Install dependencies
-      - name: Install dependencies
-        run: |
-          uv venv
-          uv pip install -r requirements.txt
-          uv pip install pytest coverage
+      # 4. Initialize virtual env
+      - name: Create virtual environment
+        run: uv venv
 
-      # 5. Run database migrations / init
+      # 5. Install dependencies
+      - name: Install dependencies
+        run: uv sync
+
+      # 6. Run database migrations / init
       - name: Initialize database
         run: |
           uv run python - <<'PY'
@@ -49,7 +50,7 @@ jobs:
               db.create_all()
           PY
 
-      # 6. Run tests with coverage
+      # 7. Run tests with coverage
       - name: Run tests
         run: |
           uv run coverage run -m pytest
