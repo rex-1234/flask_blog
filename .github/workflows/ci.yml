@@ -1,0 +1,56 @@
+name: Flask Blog CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      FLASK_ENV: testing
+      SECRET_KEY: test-secret-key
+      SQLALCHEMY_DATABASE_URI: "sqlite:///:memory:"
+      WTF_CSRF_ENABLED: "False"
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2️. Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      # 3️. Install uv
+      - name: Install uv
+        run: |
+          pip install uv
+
+      # 4. Install dependencies
+      - name: Install dependencies
+        run: |
+          uv venv
+          uv pip install -r requirements.txt
+          uv pip install pytest coverage
+
+      # 5. Run database migrations / init
+      - name: Initialize database
+        run: |
+          uv run python - <<'PY'
+          from flaskblog import create_app, db
+          app = create_app()
+          with app.app_context():
+              db.create_all()
+          PY
+
+      # 6. Run tests with coverage
+      - name: Run tests
+        run: |
+          uv run coverage run -m pytest
+          uv run coverage report

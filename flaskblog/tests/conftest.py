@@ -5,6 +5,7 @@ from flaskblog.config import Config
 
 class TestConfig(Config):
     TESTING = True
+    SECRET_KEY='test-secret-key'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
     WTF_CSRF_ENABLED = False
     MAIL_SUPRESS_SEND = True
