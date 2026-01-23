@@ -17,8 +17,8 @@ Usage:
     uv run run.py
 """
 
-from flaskblog import create_app
 from dotenv import load_dotenv
+from flaskblog import create_app
 
 load_dotenv()
 
